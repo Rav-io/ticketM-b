@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>projekt_zespolowy</name>
+    </assembly>
+    <members>
+        <member name="M:projekt_zespolowy.Controllers.ProjectController.GetAllProjects">
+            <summary>
+            Gets all projects
+            </summary>
+            <returns>List of projects</returns>
+            <response code="200">Returns list of projects</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.ProjectController.CreateProject(projekt_zespolowy.ViewModels.ProjectVM)">
+            <summary>
+            Creates project
+            </summary>
+             <param name="project"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "ProjectName": "project1"
+                 }
+            
+             </remarks>
+             <response code="200">Returns message "Project created successfully"</response>
+             <response code="400">Invalid data submitted</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.ProjectController.EditProject(projekt_zespolowy.ViewModels.ProjectUpdateVM)">
+            <summary>
+            Edits project
+            </summary>
+             <param name="project"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "id": 1,
+                    "ProjectName": "project1"
+                 }
+            
+             </remarks>
+             <response code="200">Returns message "Project updated successfully"</response>
+             <response code="404">Project not found</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.ProjectController.DeleteProject(projekt_zespolowy.ViewModels.ProjectDeleteVM)">
+            <summary>
+            Deletes project
+            </summary>
+             <param name="project"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "id": 1
+                 }
+            
+             </remarks>
+             <response code="200">Returns message "Project deleted successfully"</response>
+             <response code="404">Project not found</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.ProjectController.AssignUsersToProject(projekt_zespolowy.ViewModels.AssignUsersVM)">
+            <summary>
+            Assigns users to project
+            </summary>
+             <param name="project"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "id": 1,
+                    "userId": [1,2,3]
+                 }
+            
+             </remarks>
+             <response code="200">Returns message "Users assigned to the project successfully"</response>
+             <response code="404">Project not found / User not found</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.ProjectController.GetTasksByProject(System.Int32)">
+            <summary>
+            Gets tasks for given project
+            </summary>
+             <param name="project"></param>
+             <response code="200">Returns all tasks for given project</response>
+             <response code="404">Returns message "No tasks found for the given project"</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.TaskController.CreateTask(projekt_zespolowy.ViewModels.TaskVM)">
+            <summary>
+            Adds task
+            </summary>
+             <param name="task"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "taskName": "task1",
+                    "taskDescription": "taskdescription1",
+                    "taskStatus": 0,
+                    "projectId": 3,
+                    "userIds": [1,2,3]
+                 }
+            
+             </remarks>
+             <response code="200">Task created successfully</response>
+             <response code="400">Wrong data provided</response>
+             <response code="404">Project not found</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.TaskController.EditTask(System.Int32,projekt_zespolowy.ViewModels.TaskVM)">
+            <summary>
+            Edits specific task
+            </summary>
+             <param name="task"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "taskName": "task1",
+                    "taskDescription": "taskdescription1",
+                    "taskStatus": 0,
+                    "projectId": 3,
+                    "userIds": [1,2,3]
+                 }
+            
+             </remarks>
+             <response code="200">Task updated successfully</response>
+             <response code="400">Wrong data provided</response>
+             <response code="404">Wrong data provided</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.TaskController.DeleteTask(System.Int32)">
+            <summary>
+            Deletes specific task
+            </summary>
+             <param name="task"></param>
+             <response code="200">Task deleted successfully</response>
+             <response code="404">Task not found</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.TaskController.UpdateTaskStatus(System.Int32,projekt_zespolowy.ViewModels.TaskStatusUpdateVM)">
+            <summary>
+            Updates specific task status
+            </summary>
+             <param name="task"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "taskStatus": 1
+                 }
+            
+             </remarks>
+             <response code="200">Task status updated</response>
+             <response code="400">Wrong data provided</response>
+             <response code="404">Task not found</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.UserController.Register(projekt_zespolowy.ViewModels.UserViewModel)">
+            <summary>
+            User sign up
+            </summary>
+             <param name="user"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "userName": "user1",
+                    "password": "password123",
+                    "role": "user"
+                 }
+            
+             </remarks>
+             <response code="200">User registered successfully</response>
+             <response code="400">Username already exists</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.UserController.Login(projekt_zespolowy.ViewModels.UserLoginVM)">
+            <summary>
+            User log in
+            </summary>
+             <param name="user"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "userName": "user1",
+                    "password": "password123"
+                 }
+            
+             </remarks>
+             <response code="200">User logged in successfully</response>
+             <response code="401">Invalid credentials</response>
+        </member>
+        <member name="M:projekt_zespolowy.Controllers.UserController.GetAllUsers">
+            <summary>
+            Gets all users
+            </summary>
+             <param name="user"></param>
+             <response code="200">Returns all users</response>
+        </member>
+    </members>
+</doc>

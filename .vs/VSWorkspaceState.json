@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\DTO",
+    "\\Migrations",
+    "\\Models",
+    "\\ViewModels"
+  ],
+  "SelectedNode": "\\Controllers\\ProjectController.cs",
+  "PreviewInSolutionExplorer": false
+}
