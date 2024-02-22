@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using projekt_zespolowy.Models;
+using ticketmanager.Models;
 using System.Threading.Tasks;
-using projekt_zespolowy.ViewModels;
-using projekt_zespolowy.DTO;
+using ticketmanager.ViewModels;
+using ticketmanager.DTO;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 
-namespace projekt_zespolowy.Controllers
+namespace ticketmanager.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

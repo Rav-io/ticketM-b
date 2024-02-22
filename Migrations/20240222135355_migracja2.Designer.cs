@@ -5,26 +5,26 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using projekt_zespolowy.Models;
+using ticketmanager.Models;
 
 #nullable disable
 
-namespace projekt_zespolowy.Migrations
+namespace ticketmanager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231117130205_migracja2")]
+    [Migration("20240222135355_migracja2")]
     partial class migracja2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("projekt_zespolowy.Models.Project", b =>
+            modelBuilder.Entity("ticketmanager.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,9 +39,21 @@ namespace projekt_zespolowy.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProjectName = "Project A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProjectName = "Project B"
+                        });
                 });
 
-            modelBuilder.Entity("projekt_zespolowy.Models.Role", b =>
+            modelBuilder.Entity("ticketmanager.Models.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,9 +68,21 @@ namespace projekt_zespolowy.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "User"
+                        });
                 });
 
-            modelBuilder.Entity("projekt_zespolowy.Models.Task", b =>
+            modelBuilder.Entity("ticketmanager.Models.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,9 +110,27 @@ namespace projekt_zespolowy.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Tasks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProjectId = 1,
+                            TaskDescription = "Description 1",
+                            TaskName = "Task 1",
+                            TaskStatus = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProjectId = 2,
+                            TaskDescription = "Description 2",
+                            TaskName = "Task 2",
+                            TaskStatus = 1
+                        });
                 });
 
-            modelBuilder.Entity("projekt_zespolowy.Models.User", b =>
+            modelBuilder.Entity("ticketmanager.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,26 +159,42 @@ namespace projekt_zespolowy.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "adminpass",
+                            RoleId = 1,
+                            UserName = "admin"
+                        });
                 });
 
-            modelBuilder.Entity("TaskUser", b =>
+            modelBuilder.Entity("ticketmanager.Models.UserTask", b =>
                 {
-                    b.Property<int>("TasksId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("TaskId")
                         .HasColumnType("int");
 
-                    b.HasKey("TasksId", "UsersId");
+                    b.HasKey("UserId", "TaskId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("TaskId");
 
-                    b.ToTable("TaskUser");
+                    b.ToTable("UserTasks", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            TaskId = 1
+                        });
                 });
 
-            modelBuilder.Entity("projekt_zespolowy.Models.Task", b =>
+            modelBuilder.Entity("ticketmanager.Models.Task", b =>
                 {
-                    b.HasOne("projekt_zespolowy.Models.Project", "Project")
+                    b.HasOne("ticketmanager.Models.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -145,14 +203,14 @@ namespace projekt_zespolowy.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("projekt_zespolowy.Models.User", b =>
+            modelBuilder.Entity("ticketmanager.Models.User", b =>
                 {
-                    b.HasOne("projekt_zespolowy.Models.Project", null)
+                    b.HasOne("ticketmanager.Models.Project", null)
                         .WithMany("Users")
                         .HasForeignKey("ProjectId");
 
-                    b.HasOne("projekt_zespolowy.Models.Role", "Role")
-                        .WithMany()
+                    b.HasOne("ticketmanager.Models.Role", "Role")
+                        .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -160,25 +218,34 @@ namespace projekt_zespolowy.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("TaskUser", b =>
+            modelBuilder.Entity("ticketmanager.Models.UserTask", b =>
                 {
-                    b.HasOne("projekt_zespolowy.Models.Task", null)
+                    b.HasOne("ticketmanager.Models.Task", "Task")
                         .WithMany()
-                        .HasForeignKey("TasksId")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("projekt_zespolowy.Models.User", null)
+                    b.HasOne("ticketmanager.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Task");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("projekt_zespolowy.Models.Project", b =>
+            modelBuilder.Entity("ticketmanager.Models.Project", b =>
                 {
                     b.Navigation("Tasks");
 
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("ticketmanager.Models.Role", b =>
+                {
                     b.Navigation("Users");
                 });
 #pragma warning restore 612, 618

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace projekt_zespolowy.ViewModels;
+namespace ticketmanager.ViewModels;
 
 public class UserLoginVM
 {

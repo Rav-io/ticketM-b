@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace projekt_zespolowy.Models;
+namespace ticketmanager.Models;
 
 public class User
     {

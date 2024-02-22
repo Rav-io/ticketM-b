@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using projekt_zespolowy.Models;
+using ticketmanager.Models;
 using System;
 
-namespace projekt_zespolowy.DTO
+namespace ticketmanager.DTO
 {
     public class TaskDto
     {

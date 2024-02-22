@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using projekt_zespolowy.Models;
-using projekt_zespolowy.ViewModels;
+using ticketmanager.Models;
+using ticketmanager.ViewModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 
-namespace projekt_zespolowy.Controllers
+namespace ticketmanager.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

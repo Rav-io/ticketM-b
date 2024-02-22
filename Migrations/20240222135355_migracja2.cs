@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace projekt_zespolowy.Migrations
+namespace ticketmanager.Migrations
 {
     public partial class migracja2 : Migration
     {
@@ -84,38 +84,71 @@ namespace projekt_zespolowy.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaskUser",
+                name: "UserTasks",
                 columns: table => new
                 {
-                    TasksId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    TaskId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaskUser", x => new { x.TasksId, x.UsersId });
+                    table.PrimaryKey("PK_UserTasks", x => new { x.UserId, x.TaskId });
                     table.ForeignKey(
-                        name: "FK_TaskUser_Tasks_TasksId",
-                        column: x => x.TasksId,
+                        name: "FK_UserTasks_Tasks_TaskId",
+                        column: x => x.TaskId,
                         principalTable: "Tasks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TaskUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_UserTasks_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Projects",
+                columns: new[] { "Id", "ProjectName" },
+                values: new object[,]
+                {
+                    { 1, "Project A" },
+                    { 2, "Project B" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Tasks",
+                columns: new[] { "Id", "ProjectId", "TaskDescription", "TaskName", "TaskStatus" },
+                values: new object[] { 1, 1, "Description 1", "Task 1", 0 });
+
+            migrationBuilder.InsertData(
+                table: "Tasks",
+                columns: new[] { "Id", "ProjectId", "TaskDescription", "TaskName", "TaskStatus" },
+                values: new object[] { 2, 2, "Description 2", "Task 2", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Password", "ProjectId", "RoleId", "UserName" },
+                values: new object[] { 1, "adminpass", null, 1, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "UserTasks",
+                columns: new[] { "TaskId", "UserId" },
+                values: new object[] { 1, 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ProjectId",
                 table: "Tasks",
                 column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TaskUser_UsersId",
-                table: "TaskUser",
-                column: "UsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ProjectId",
@@ -126,12 +159,17 @@ namespace projekt_zespolowy.Migrations
                 name: "IX_Users_RoleId",
                 table: "Users",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTasks_TaskId",
+                table: "UserTasks",
+                column: "TaskId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TaskUser");
+                name: "UserTasks");
 
             migrationBuilder.DropTable(
                 name: "Tasks");

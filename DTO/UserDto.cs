@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace projekt_zespolowy.DTO
+namespace ticketmanager.DTO
 {
     public class UserDto
     {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace projekt_zespolowy.Models
+namespace ticketmanager.Models
 {
     public class Task
     {

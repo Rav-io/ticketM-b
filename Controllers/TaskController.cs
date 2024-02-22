@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using projekt_zespolowy.Models;
+using ticketmanager.Models;
 using System.Threading.Tasks;
-using projekt_zespolowy.ViewModels;
-using projekt_zespolowy.DTO;
+using ticketmanager.ViewModels;
+using ticketmanager.DTO;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace projekt_zespolowy.Controllers
+namespace ticketmanager.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -47,7 +47,7 @@ namespace projekt_zespolowy.Controllers
                 return BadRequest(ModelState);
             }
 
-            var task = new projekt_zespolowy.Models.Task
+            var task = new ticketmanager.Models.Task
             {
                 TaskName = taskViewModel.TaskName,
                 TaskDescription = taskViewModel.TaskDescription,

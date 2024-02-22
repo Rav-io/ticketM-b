@@ -1,12 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
-    "\\DTO",
     "\\Migrations",
     "\\Models",
     "\\ViewModels"
   ],
-  "SelectedNode": "\\Controllers\\ProjectController.cs",
+  "SelectedNode": "\\ticketmanager.sln",
   "PreviewInSolutionExplorer": false
 }
