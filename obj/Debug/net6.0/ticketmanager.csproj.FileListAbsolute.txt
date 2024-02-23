@@ -75,3 +75,4 @@ C:\Users\olejn\Desktop\ticketmanager_backend\obj\Debug\net6.0\ref\ticketmanager.
 C:\Users\olejn\Desktop\ticketmanager_backend\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\olejn\Desktop\ticketmanager_backend\bin\Debug\net6.0\Npgsql.dll
 C:\Users\olejn\Desktop\ticketmanager_backend\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\olejn\Desktop\ticketmanager_backend\bin\Debug\net6.0\BCrypt.Net-Core.dll

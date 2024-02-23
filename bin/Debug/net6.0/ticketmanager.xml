@@ -87,7 +87,6 @@
             </summary>
              <param name="project"></param>
              <response code="200">Returns all tasks for given project</response>
-             <response code="404">Returns message "No tasks found for the given project"</response>
         </member>
         <member name="M:ticketmanager.Controllers.TaskController.CreateTask(ticketmanager.ViewModels.TaskVM)">
             <summary>

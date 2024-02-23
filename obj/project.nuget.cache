@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "c6KLJdWNRjHUEpD3tjw/03alcgIwAtLgNrWIF62QBVBfKcjpyFOSoaTL8wRNUOOXsL48FcabDyUcxgdUYLPh3g==",
+  "dgSpecHash": "PBh5j3O4IvPYH6YTXvBOdvi6ACDe24GvPg2wqcf7ZiFvHyDxKTz92ric6O5hmIG02jZwwKI8bVE6OEn1sXAiwg==",
   "success": true,
   "projectFilePath": "C:\\Users\\olejn\\Desktop\\ticketmanager_backend\\ticketmanager.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\olejn\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\olejn\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
     "C:\\Users\\olejn\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\olejn\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.4\\microsoft.aspnet.identity.core.2.2.4.nupkg.sha512",

@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using BCrypt.Net;
 
 
 namespace ticketmanager.Controllers
@@ -58,11 +59,13 @@ namespace ticketmanager.Controllers
                 role = new Role { Name = model.Role };
                 _context.Roles.Add(role);
             }
+
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password);
             
             var user = new User
             {
                 UserName = model.UserName,
-                Password = model.Password,
+                Password = hashedPassword,
                 Role = role
             };
 
@@ -91,34 +94,30 @@ namespace ticketmanager.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginVM model)
         {
-            // Include the Role in the query
             var user = await _context.Users.Include(u => u.Role).SingleOrDefaultAsync(u => u.UserName == model.UserName);
 
-            if (user == null || model.Password != user.Password)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
                 return Unauthorized("Invalid credentials");
             }
 
-            // Create claims for the JWT token, including the user's role
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, user.Role.Name) // Assuming the Role property is not null
+                new Claim(ClaimTypes.Role, user.Role.Name)
             };
 
-            // Create the JWT token
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(30),
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
             );
 
-            // Return the token, expiration, and user's role in the response
             return Ok(new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                 expiration = token.ValidTo,
-                role = user.Role.Name // Include the user's role in the response
+                role = user.Role.Name
             });
         }
 

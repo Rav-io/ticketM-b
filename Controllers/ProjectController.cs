@@ -182,7 +182,6 @@ namespace ticketmanager.Controllers
         ///</summary>
         /// <param name="project"></param>
         /// <response code="200">Returns all tasks for given project</response>
-        /// <response code="404">Returns message "No tasks found for the given project"</response>
         [HttpGet("project/{projectId}")]
         public async Task<IActionResult> GetTasksByProject(int projectId)
         {
@@ -207,11 +206,6 @@ namespace ticketmanager.Controllers
                 .Where(p => p.Id == projectId)
                 .Select(p => p.ProjectName)
                 .FirstOrDefaultAsync();
-
-            if (tasks == null || !tasks.Any())
-            {
-                return NotFound("No tasks found for the given project.");
-            }
 
             var response = new
             {
