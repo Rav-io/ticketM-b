@@ -13,5 +13,6 @@ namespace ticketmanager.ViewModels
         [Required]
         public int ProjectId { get; set; }
         public List<int>? UserIds { get; set; }
+        public DateTime CreationDate { get; set;}
     }
 }

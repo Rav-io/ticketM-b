@@ -52,8 +52,11 @@ namespace ticketmanager.Controllers
                 TaskName = taskViewModel.TaskName,
                 TaskDescription = taskViewModel.TaskDescription,
                 TaskStatus = taskViewModel.TaskStatus,
-                ProjectId = taskViewModel.ProjectId
+                ProjectId = taskViewModel.ProjectId,
+                CreationDate = DateTime.Now
             };
+
+            string formattedCreationDate = task.CreationDate.ToString("yyyy-MM-dd HH:mm:ss");
 
             var project = await _context.Projects.FindAsync(taskViewModel.ProjectId);
             if (project == null)
@@ -87,7 +90,8 @@ namespace ticketmanager.Controllers
                 TaskDescription = task.TaskDescription,
                 TaskStatus = task.TaskStatus,
                 ProjectId = task.ProjectId,
-                Users = userDtos
+                Users = userDtos,
+                CreationDate = DateTime.Now
             };
 
             return Ok(taskDto);

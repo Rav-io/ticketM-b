@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ticketmanager.Migrations
 {
-    public partial class migracja2 : Migration
+    public partial class migracja1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +44,8 @@ namespace ticketmanager.Migrations
                     TaskName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TaskDescription = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     TaskStatus = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,13 +129,13 @@ namespace ticketmanager.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "ProjectId", "TaskDescription", "TaskName", "TaskStatus" },
-                values: new object[] { 1, 1, "Description 1", "Task 1", 0 });
+                columns: new[] { "Id", "CreationDate", "ProjectId", "TaskDescription", "TaskName", "TaskStatus" },
+                values: new object[] { 1, new DateTime(2024, 2, 28, 18, 54, 50, 336, DateTimeKind.Local).AddTicks(5063), 1, "Description 1", "Task 1", 0 });
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "ProjectId", "TaskDescription", "TaskName", "TaskStatus" },
-                values: new object[] { 2, 2, "Description 2", "Task 2", 1 });
+                columns: new[] { "Id", "CreationDate", "ProjectId", "TaskDescription", "TaskName", "TaskStatus" },
+                values: new object[] { 2, new DateTime(2024, 2, 28, 18, 54, 50, 336, DateTimeKind.Local).AddTicks(5094), 2, "Description 2", "Task 2", 1 });
 
             migrationBuilder.InsertData(
                 table: "Users",

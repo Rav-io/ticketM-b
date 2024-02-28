@@ -13,5 +13,6 @@ namespace ticketmanager.DTO
         public int TaskStatus { get; set; }
         public List<UserDto> Users { get; set; }
         public int ProjectId { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

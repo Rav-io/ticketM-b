@@ -88,6 +88,9 @@ namespace ticketmanager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
@@ -113,6 +116,7 @@ namespace ticketmanager.Migrations
                         new
                         {
                             Id = 1,
+                            CreationDate = new DateTime(2024, 2, 28, 18, 54, 50, 336, DateTimeKind.Local).AddTicks(5063),
                             ProjectId = 1,
                             TaskDescription = "Description 1",
                             TaskName = "Task 1",
@@ -121,6 +125,7 @@ namespace ticketmanager.Migrations
                         new
                         {
                             Id = 2,
+                            CreationDate = new DateTime(2024, 2, 28, 18, 54, 50, 336, DateTimeKind.Local).AddTicks(5094),
                             ProjectId = 2,
                             TaskDescription = "Description 2",
                             TaskName = "Task 2",

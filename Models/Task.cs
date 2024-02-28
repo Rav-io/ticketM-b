@@ -13,5 +13,6 @@ namespace ticketmanager.Models
         public ICollection<User> Users { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

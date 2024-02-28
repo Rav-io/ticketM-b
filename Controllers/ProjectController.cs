@@ -198,7 +198,8 @@ namespace ticketmanager.Controllers
                                           {
                                               Id = u.Id,
                                               UserName = u.UserName
-                                          }).ToList()
+                                          }).ToList(),
+                                          CreationDate = t.CreationDate
                                       })
                                       .ToListAsync();
 
