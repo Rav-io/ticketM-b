@@ -27,7 +27,16 @@ namespace ticketmanager.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProjects()
         {
-            var projects = await _context.Projects.ToListAsync();
+            var projectsUser = await _context.Projects
+                .Include(p => p.UserProjects)
+                .ToListAsync();
+
+            var projects = projectsUser.Select(project => new ProjectUserDto
+            {
+                ProjectId = project.Id,
+                ProjectName = project.ProjectName,
+                UserIds = project.UserProjects.Select(up => up.UserId).ToList()
+            }).ToList();
 
             return Ok(projects);
         }

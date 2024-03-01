@@ -7,6 +7,6 @@
     "\\Models",
     "\\ViewModels"
   ],
-  "SelectedNode": "\\Controllers\\TaskController.cs",
+  "SelectedNode": "\\DTO\\ProjectUserDto.cs",
   "PreviewInSolutionExplorer": false
 }

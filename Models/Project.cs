@@ -9,5 +9,6 @@ namespace ticketmanager.Models
         public string ProjectName { get; set; }
         public List<User> Users { get; set; }
         public List<Task> Tasks { get; set; }
+        public IList<UserProject> UserProjects { get; set; }
     }
 }
