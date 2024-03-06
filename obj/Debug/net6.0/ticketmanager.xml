@@ -81,6 +81,24 @@
              <response code="200">Returns message "Users assigned to the project successfully"</response>
              <response code="404">Project not found / User not found</response>
         </member>
+        <member name="M:ticketmanager.Controllers.ProjectController.UnassignUsersFromProject(ticketmanager.ViewModels.UnassignUserVM)">
+            <summary>
+            Unassigns user from project
+            </summary>
+             <param name="project"></param>
+             <remarks>
+             Sample request:
+            
+                 POST
+                 {
+                    "id": 1,
+                    "userId": 1
+                 }
+            
+             </remarks>
+             <response code="200">Returns message "Users unassigned from the project successfully"</response>
+             <response code="404">Project not found / User not found</response>
+        </member>
         <member name="M:ticketmanager.Controllers.ProjectController.GetTasksByProject(System.Int32)">
             <summary>
             Gets tasks for given project

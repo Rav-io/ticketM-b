@@ -164,6 +164,8 @@ namespace ticketmanager.Controllers
                 return NotFound("Project not found");
             }
 
+            var userProjects = new List<UserProject>();
+
             foreach (int userId in assignment.UserId)
             {
                 var user = await _context.Users.FindAsync(userId);
@@ -173,17 +175,65 @@ namespace ticketmanager.Controllers
                     return NotFound("User not found");
                 }
 
-                if (project.Users == null)
+                var userProject = new UserProject
                 {
-                    project.Users = new List<User>();
-                }
+                    UserId = userId,
+                    ProjectId = assignment.Id
+                };
 
-                project.Users.Add(user);
+                userProjects.Add(userProject);
             }
 
+            _context.UserProjects.AddRange(userProjects);
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Users assigned to the project successfully" });
+        }
+
+        ///<summary>
+        ///Unassigns user from project
+        ///</summary>
+        /// <param name="project"></param>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///     {
+        ///        "id": 1,
+        ///        "userId": 1
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns message "Users unassigned from the project successfully"</response>
+        /// <response code="404">Project not found / User not found</response>
+        [HttpPost("unassign")]
+        public async Task<IActionResult> UnassignUsersFromProject([FromBody] UnassignUserVM assignment)
+        {
+            var project = await _context.Projects.FindAsync(assignment.Id);
+
+            if (project == null)
+            {
+                return NotFound("Project not found");
+            }
+
+            var user = await _context.Users.FindAsync(assignment.UserId);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var userProject = await _context.UserProjects.FirstOrDefaultAsync(up => up.ProjectId == assignment.Id && up.UserId == assignment.UserId);
+
+            if (userProject == null)
+            {
+                return NotFound("User project not found");
+            }
+
+            _context.UserProjects.Remove(userProject);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "User unassigned from the project successfully" });
         }
 
         ///<summary>
@@ -224,6 +274,33 @@ namespace ticketmanager.Controllers
             };
 
             return Ok(response);
+        }
+
+        ///<summary>
+        ///Gets users assigned to given project
+        ///</summary>
+        /// <param name="project"></param>
+        /// <response code="200">Returns all users assigned for given project</response>
+        [HttpGet("{projectId}/users")]
+        public async Task<IActionResult> GetUsersByProject(int projectId)
+        {
+            var project = await _context.Projects
+                .Include(p => p.UserProjects)
+                .ThenInclude(up => up.User)
+                .FirstOrDefaultAsync(p => p.Id == projectId);
+
+            if (project == null)
+            {
+                return NotFound("Project not found");
+            }
+
+            var users = project.UserProjects.Select(up => new
+            {
+                UserId = up.UserId,
+                UserName = up.User.UserName
+            }).ToList();
+
+            return Ok(users);
         }
     }
 }
