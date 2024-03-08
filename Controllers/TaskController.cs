@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ticketmanager.ViewModels;
 using ticketmanager.DTO;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ticketmanager.Controllers
 {
@@ -39,6 +40,7 @@ namespace ticketmanager.Controllers
         /// <response code="200">Task created successfully</response>
         /// <response code="400">Wrong data provided</response>
         /// <response code="404">Project not found</response>
+        [Authorize]
         [HttpPost("addtask")]
         public async Task<IActionResult> CreateTask([FromBody] TaskVM taskViewModel)
         {
@@ -117,6 +119,7 @@ namespace ticketmanager.Controllers
         /// <response code="200">Task updated successfully</response>
         /// <response code="400">Wrong data provided</response>
         /// <response code="404">Wrong data provided</response>
+        [Authorize]
         [HttpPut("edittask/{id}")]
         public async Task<IActionResult> EditTask(int id, [FromBody] TaskVM taskViewModel)
         {
@@ -168,6 +171,7 @@ namespace ticketmanager.Controllers
         /// <param name="task"></param>
         /// <response code="200">Task deleted successfully</response>
         /// <response code="404">Task not found</response>
+        [Authorize]
         [HttpDelete("deletetask/{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
@@ -199,6 +203,7 @@ namespace ticketmanager.Controllers
         /// <response code="200">Task status updated</response>
         /// <response code="400">Wrong data provided</response>
         /// <response code="404">Task not found</response>
+        [Authorize]
         [HttpPut("updatetaskstatus/{id}")]
         public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] TaskStatusUpdateVM updateViewModel)
         {

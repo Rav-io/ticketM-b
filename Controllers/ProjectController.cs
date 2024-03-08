@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ticketmanager.ViewModels;
 using ticketmanager.DTO;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace ticketmanager.Controllers
@@ -24,6 +25,7 @@ namespace ticketmanager.Controllers
         ///</summary>
         ///<returns>List of projects</returns>
         ///<response code="200">Returns list of projects</response>
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllProjects()
         {
@@ -56,6 +58,7 @@ namespace ticketmanager.Controllers
         /// </remarks>
         /// <response code="200">Returns message "Project created successfully"</response>
         /// <response code="400">Invalid data submitted</response>
+        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> CreateProject([FromBody] ProjectVM project)
         {
@@ -91,6 +94,7 @@ namespace ticketmanager.Controllers
         /// </remarks>
         /// <response code="200">Returns message "Project updated successfully"</response>
         /// <response code="404">Project not found</response>
+        [Authorize]
         [HttpPut("edit")]
         public async Task<IActionResult> EditProject([FromBody] ProjectUpdateVM projectDTO)
         {
@@ -122,6 +126,7 @@ namespace ticketmanager.Controllers
         /// </remarks>
         /// <response code="200">Returns message "Project deleted successfully"</response>
         /// <response code="404">Project not found</response>
+        [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteProject([FromBody] ProjectDeleteVM projectDTO)
         {
@@ -154,6 +159,7 @@ namespace ticketmanager.Controllers
         /// </remarks>
         /// <response code="200">Returns message "Users assigned to the project successfully"</response>
         /// <response code="404">Project not found / User not found</response>
+        [Authorize]
         [HttpPost("assign")]
         public async Task<IActionResult> AssignUsersToProject([FromBody] AssignUsersVM assignment)
         {
@@ -206,6 +212,7 @@ namespace ticketmanager.Controllers
         /// </remarks>
         /// <response code="200">Returns message "Users unassigned from the project successfully"</response>
         /// <response code="404">Project not found / User not found</response>
+        [Authorize]
         [HttpPost("unassign")]
         public async Task<IActionResult> UnassignUsersFromProject([FromBody] UnassignUserVM assignment)
         {
@@ -241,6 +248,7 @@ namespace ticketmanager.Controllers
         ///</summary>
         /// <param name="project"></param>
         /// <response code="200">Returns all tasks for given project</response>
+        [Authorize]
         [HttpGet("project/{projectId}")]
         public async Task<IActionResult> GetTasksByProject(int projectId)
         {
@@ -281,6 +289,7 @@ namespace ticketmanager.Controllers
         ///</summary>
         /// <param name="project"></param>
         /// <response code="200">Returns all users assigned for given project</response>
+        [Authorize]
         [HttpGet("{projectId}/users")]
         public async Task<IActionResult> GetUsersByProject(int projectId)
         {

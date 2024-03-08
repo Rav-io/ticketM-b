@@ -109,7 +109,7 @@ namespace ticketmanager.Controllers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
+                expires: DateTime.UtcNow.AddMinutes(60),
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
             );
 
@@ -126,6 +126,7 @@ namespace ticketmanager.Controllers
         ///</summary>
         /// <param name="user"></param>
         /// <response code="200">Returns all users</response>
+        [Authorize]
         [HttpGet("getusers")]
         public async Task<IActionResult> GetAllUsers()
         {
