@@ -252,6 +252,15 @@ namespace ticketmanager.Controllers
         [HttpGet("project/{projectId}")]
         public async Task<IActionResult> GetTasksByProject(int projectId)
         {
+            var projectName = await _context.Projects
+                .Where(p => p.Id == projectId)
+                .Select(p => p.ProjectName)
+                .FirstOrDefaultAsync();
+
+            if (projectName == null)
+            {
+                return NotFound($"Project with ID {projectId} not found");
+            }
             var tasks = await _context.Tasks
                                       .Where(t => t.ProjectId == projectId)
                                       .Include(t => t.Users)
@@ -269,12 +278,6 @@ namespace ticketmanager.Controllers
                                           CreationDate = t.CreationDate
                                       })
                                       .ToListAsync();
-
-            var projectName = await _context.Projects
-                .Where(p => p.Id == projectId)
-                .Select(p => p.ProjectName)
-                .FirstOrDefaultAsync();
-
             var response = new
             {
                 ProjectName = projectName,
