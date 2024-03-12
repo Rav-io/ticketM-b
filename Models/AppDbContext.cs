@@ -100,10 +100,10 @@ namespace ticketmanager.Models
 
             var tasks = new List<Task>
             {
-                new Task { Id = 1, TaskName = "Task 1", TaskDescription = "Description 1", TaskStatus = 0, ProjectId = projects[0].Id, CreationDate = DateTime.Now },
-                new Task { Id = 2, TaskName = "Task 2", TaskDescription = "Description 2", TaskStatus = 1, ProjectId = projects[1].Id, CreationDate = DateTime.Now },
-                new Task { Id = 3, TaskName = "Task 3", TaskDescription = "Description 3", TaskStatus = 0, ProjectId = projects[2].Id, CreationDate = DateTime.Now },
-                new Task { Id = 4, TaskName = "Task 4", TaskDescription = "Description 4", TaskStatus = 1, ProjectId = projects[3].Id, CreationDate = DateTime.Now },
+                new Task { Id = 1, TaskName = "Task 1", TaskDescription = "Description 1", TaskStatus = 0, ProjectId = projects[0].Id, CreationDate = DateTime.Now, CreatedBy = "admin" },
+                new Task { Id = 2, TaskName = "Task 2", TaskDescription = "Description 2", TaskStatus = 1, ProjectId = projects[1].Id, CreationDate = DateTime.Now, CreatedBy = "admin" },
+                new Task { Id = 3, TaskName = "Task 3", TaskDescription = "Description 3", TaskStatus = 0, ProjectId = projects[2].Id, CreationDate = DateTime.Now, CreatedBy = "admin" },
+                new Task { Id = 4, TaskName = "Task 4", TaskDescription = "Description 4", TaskStatus = 1, ProjectId = projects[3].Id, CreationDate = DateTime.Now, CreatedBy = "admin" },
             };
             modelBuilder.Entity<Task>().HasData(tasks);
 

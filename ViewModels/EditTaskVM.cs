@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ticketmanager.ViewModels
 {
-    public class TaskVM
+    public class EditTaskVM
     {
         [Required]
         public string TaskName { get; set; }
@@ -10,11 +10,6 @@ namespace ticketmanager.ViewModels
         public string TaskDescription { get; set; }
         [Required]
         public int TaskStatus { get; set; }
-        [Required]
-        public int ProjectId { get; set; }
         public List<int>? UserIds { get; set; }
-        [Required]
-        public string CreatedBy { get; set; }
-        public DateTime CreationDate { get; set;}
     }
 }

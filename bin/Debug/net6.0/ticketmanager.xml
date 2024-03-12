@@ -135,7 +135,7 @@
              <response code="400">Wrong data provided</response>
              <response code="404">Project not found</response>
         </member>
-        <member name="M:ticketmanager.Controllers.TaskController.EditTask(System.Int32,ticketmanager.ViewModels.TaskVM)">
+        <member name="M:ticketmanager.Controllers.TaskController.EditTask(System.Int32,ticketmanager.ViewModels.EditTaskVM)">
             <summary>
             Edits specific task
             </summary>

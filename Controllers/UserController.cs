@@ -117,7 +117,8 @@ namespace ticketmanager.Controllers
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                 expiration = token.ValidTo,
-                role = user.Role.Name
+                role = user.Role.Name,
+                user = user.UserName
             });
         }
 

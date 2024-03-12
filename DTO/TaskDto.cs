@@ -14,5 +14,6 @@ namespace ticketmanager.DTO
         public List<UserDto> Users { get; set; }
         public int ProjectId { get; set; }
         public DateTime CreationDate { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

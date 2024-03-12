@@ -55,7 +55,8 @@ namespace ticketmanager.Controllers
                 TaskDescription = taskViewModel.TaskDescription,
                 TaskStatus = taskViewModel.TaskStatus,
                 ProjectId = taskViewModel.ProjectId,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                CreatedBy = taskViewModel.CreatedBy
             };
 
             string formattedCreationDate = task.CreationDate.ToString("yyyy-MM-dd HH:mm:ss");
@@ -121,7 +122,7 @@ namespace ticketmanager.Controllers
         /// <response code="404">Wrong data provided</response>
         [Authorize]
         [HttpPut("edittask/{id}")]
-        public async Task<IActionResult> EditTask(int id, [FromBody] TaskVM taskViewModel)
+        public async Task<IActionResult> EditTask(int id, [FromBody] EditTaskVM editTaskViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -134,14 +135,14 @@ namespace ticketmanager.Controllers
                 return NotFound();
             }
 
-            task.TaskName = taskViewModel.TaskName;
-            task.TaskDescription = taskViewModel.TaskDescription;
-            task.TaskStatus = taskViewModel.TaskStatus;
+            task.TaskName = editTaskViewModel.TaskName;
+            task.TaskDescription = editTaskViewModel.TaskDescription;
+            task.TaskStatus = editTaskViewModel.TaskStatus;
 
-            if (taskViewModel.UserIds != null && taskViewModel.UserIds.Any())
+            if (editTaskViewModel.UserIds != null && editTaskViewModel.UserIds.Any())
             {
                 var selectedUsers = await _context.Users
-                    .Where(u => taskViewModel.UserIds.Contains(u.Id))
+                    .Where(u => editTaskViewModel.UserIds.Contains(u.Id))
                     .ToListAsync();
                 task.Users = selectedUsers;
             }
