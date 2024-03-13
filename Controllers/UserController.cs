@@ -141,5 +141,24 @@ namespace ticketmanager.Controllers
 
             return Ok(userViewModels);
         }
+
+        ///<summary>
+        ///Gets all roles
+        ///</summary>
+        /// <response code="200">Returns all roles</response>
+        [Authorize]
+        [HttpGet("getroles")]
+        public async Task<IActionResult> GetAllRoles()
+        {
+            var roles = await _context.Roles.ToListAsync();
+
+            var rolesViewModel = roles.Select(role => new RoleVM
+            {
+                Id = role.Id,
+                Name = role.Name,
+            }).ToList();
+
+            return Ok(rolesViewModel);
+        }
     }
 }

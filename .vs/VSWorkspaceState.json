@@ -6,6 +6,6 @@
     "\\Models",
     "\\ViewModels"
   ],
-  "SelectedNode": "\\Controllers\\TaskController.cs",
+  "SelectedNode": "\\Models\\AppDbContext.cs",
   "PreviewInSolutionExplorer": false
 }

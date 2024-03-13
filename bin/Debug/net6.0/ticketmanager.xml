@@ -227,5 +227,11 @@
              <param name="user"></param>
              <response code="200">Returns all users</response>
         </member>
+        <member name="M:ticketmanager.Controllers.UserController.GetAllRoles">
+            <summary>
+            Gets all roles
+            </summary>
+             <response code="200">Returns all roles</response>
+        </member>
     </members>
 </doc>
